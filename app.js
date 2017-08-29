@@ -14,15 +14,15 @@ request('https://detroit.craigslist.org/search/web', function (err, res, body) {
         $('.result-title').each(function () {
             let link = $(this).attr('href');
             let title = $(this).text();
-            listArray.push(urlStart + link + '\n');
+            listArray.push('\n' + title + '\n' + urlStart + link + '\n');
         });
 
         console.log(listArray);
-        console.log(moment().format('YYYY-MM-DD-h:mma'));
 
-        fs.writeFile(moment().format("YYYY-MM-DD-hhmma") + ".html", listArray, function (err) {
+        fs.writeFile("jobs/" + moment().format("YYYY-MM-DD-hhmma") + ".html", listArray, function (err) {
             if (err) throw err;
-            console.log('file saved');
+            console.log('file saved: ' + moment().format("YYYY-MM-DD-hhmma"));
         });
     }
 });
+
